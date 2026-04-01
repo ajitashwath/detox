@@ -1,19 +1,12 @@
-// HomeViewModel.swift
-// Detox – Home Screen Logic
-
 import SwiftUI
 import Combine
 
 @Observable
 final class HomeViewModel {
 
-    // MARK: – Displayed State
-
     var pauseCount: Int = 0
     var isShieldActive: Bool = false
     var insightText: String = ""
-
-    // MARK: – Lifecycle
 
     func onAppear() {
         refresh()
@@ -25,16 +18,12 @@ final class HomeViewModel {
         insightText = UserDefaultsManager.shared.currentInsightText
     }
 
-    // MARK: – Toggle
-
     func toggleShield() {
         withAnimation(DetoxAnimation.breathe) {
             FamilyControlsManager.shared.toggleShield()
             isShieldActive = UserDefaultsManager.shared.isShieldActive
         }
     }
-
-    // MARK: – Navigation
 
     func openReflections() {
         AppCoordinator.shared.navigate(to: .reflection)

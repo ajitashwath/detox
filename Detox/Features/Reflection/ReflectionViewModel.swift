@@ -1,6 +1,3 @@
-// ReflectionViewModel.swift
-// Detox – Reflection Timeline Logic
-
 import SwiftUI
 
 @Observable

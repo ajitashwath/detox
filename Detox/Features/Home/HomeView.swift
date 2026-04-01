@@ -1,6 +1,3 @@
-// HomeView.swift
-// Detox – Screen 2: Home Dashboard
-
 import SwiftUI
 
 struct HomeView: View {
@@ -15,35 +12,30 @@ struct HomeView: View {
 
             VStack(spacing: 0) {
 
-                // MARK: – Top Bar
                 topBar
                     .padding(.top, Spacing.xl)
                     .screenPadding()
 
                 Spacer()
 
-                // MARK: – Hero Stat
                 heroStat
                     .opacity(contentVisible ? 1 : 0)
                     .offset(y: contentVisible ? 0 : 24)
 
                 Spacer().frame(height: Spacing.xxl)
 
-                // MARK: – Toggle
                 shieldToggle
                     .opacity(contentVisible ? 1 : 0)
                     .screenPadding()
 
                 Spacer().frame(height: Spacing.xl)
 
-                // MARK: – Insight
                 insightText
                     .opacity(contentVisible ? DetoxOpacity.secondary : 0)
                     .screenPadding()
 
                 Spacer()
 
-                // MARK: – Bottom Nav
                 bottomNav
                     .screenPadding()
                     .padding(.bottom, Spacing.xl)
@@ -56,8 +48,6 @@ struct HomeView: View {
         }
     }
 
-    // MARK: – Top Bar
-
     private var topBar: some View {
         HStack {
             Text("detox")
@@ -67,14 +57,11 @@ struct HomeView: View {
 
             Spacer()
 
-            // Today date, subtle
             Text(Date().formatted(.dateTime.weekday(.wide).month().day()))
                 .font(DetoxFont.micro)
                 .foregroundStyle(Color.black.opacity(DetoxOpacity.tertiary))
         }
     }
-
-    // MARK: – Hero Stat
 
     private var heroStat: some View {
         VStack(spacing: Spacing.sm) {
@@ -95,13 +82,10 @@ struct HomeView: View {
         .multilineTextAlignment(.center)
     }
 
-    // MARK: – Shield Toggle
-
     private var shieldToggle: some View {
         HStack(spacing: 0) {
             toggleLabel("ON", isSelected: viewModel.isShieldActive)
 
-            // Track
             ZStack {
                 Capsule()
                     .fill(Color.black.opacity(0.06))
@@ -131,8 +115,6 @@ struct HomeView: View {
             .frame(width: 36)
     }
 
-    // MARK: – Insight Text
-
     private var insightText: some View {
         Text(viewModel.insightText)
             .font(DetoxFont.caption)
@@ -141,8 +123,6 @@ struct HomeView: View {
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
     }
-
-    // MARK: – Bottom Navigation
 
     private var bottomNav: some View {
         HStack {
@@ -175,8 +155,6 @@ struct HomeView: View {
             }
         }
     }
-
-    // MARK: – Animation
 
     private func animateIn() {
         withAnimation(DetoxAnimation.slow.delay(0.1)) { contentVisible = true }

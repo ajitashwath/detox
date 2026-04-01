@@ -2,7 +2,7 @@ import SwiftUI
 import ManagedSettings
 
 struct ShieldInterceptionView: View {
-    // State
+
     @State private var headlineVisible = false
     @State private var actionsVisible = false
     @State private var isTyping = false
@@ -21,7 +21,6 @@ struct ShieldInterceptionView: View {
 
     @State private var voiceManager = VoiceInputManager.shared
 
-    // Body
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
@@ -34,24 +33,20 @@ struct ShieldInterceptionView: View {
         }.animation(DetoxAnimation.standard, value: isTyping).onAppear { animateIn() }
     }
 
-    // Main Panel
     private var mainPanel: some View {
         VStack(spacing: 0) {
             Spacer()
 
-            // Headline
             headlineView
                 .padding(.horizontal, Spacing.screenHorizontal)
                 .opacity(headlineVisible ? 1 : 0)
 
             Spacer().frame(height: Spacing.massive)
 
-            // Action Buttons
             VStack(spacing: Spacing.md) {
-                // Voice button
+
                 voiceButton
 
-                // Type button
                 Button {
                     withAnimation(DetoxAnimation.standard) { isTyping = true }
                 } label: {
@@ -70,12 +65,10 @@ struct ShieldInterceptionView: View {
 
             Spacer().frame(height: Spacing.xxl)
 
-            // Continue
             continueButton.opacity(actionsVisible ? DetoxOpacity.ghost : 0).padding(.bottom, Spacing.xxl + Spacing.xl)
         }
     }
 
-    // Headline
     private var headlineView: some View {
         VStack(alignment: .center, spacing: Spacing.xs) {
             characterReveal("Why are you")
@@ -100,7 +93,6 @@ struct ShieldInterceptionView: View {
         }
     }
 
-    // Voice Button
     private var voiceButton: some View {
         Button {
             Task {
@@ -140,7 +132,6 @@ struct ShieldInterceptionView: View {
         .animation(DetoxAnimation.micro, value: isRecording)
     }
 
-    // Continue Anyway
     private var continueButton: some View {
         ZStack {
             if isContinueHolding {
@@ -183,10 +174,9 @@ struct ShieldInterceptionView: View {
         )
     }
 
-    // Typing Panel
     private var typingPanel: some View {
         VStack(spacing: 0) {
-            // Back button
+
             HStack {
                 Button {
                     withAnimation(DetoxAnimation.standard) { isTyping = false }
@@ -207,7 +197,6 @@ struct ShieldInterceptionView: View {
                     .foregroundStyle(Color.white)
                     .screenPadding()
 
-                // Text editor
                 ZStack(alignment: .topLeading) {
                     if typedText.isEmpty {
                         Text("Write your reason here…")
@@ -234,7 +223,6 @@ struct ShieldInterceptionView: View {
 
             Spacer()
 
-            // Submit
             Button("Save & Continue") {
                 saveTypedEntry(text: typedText)
                 onTypedNote?(typedText)
@@ -247,7 +235,6 @@ struct ShieldInterceptionView: View {
         .background(Color.black.ignoresSafeArea())
     }
 
-    // Persistence
     private func saveVoiceEntry(url: URL) {
         let entry = ReflectionEntry(
             appBundleID: appBundleID,
@@ -286,7 +273,6 @@ struct ShieldInterceptionView: View {
         UserDefaultsManager.shared.incrementWeeklyPauseCount(forBundleID: appBundleID)
     }
 
-    // Entrance Animation
     private func animateIn() {
         headlineVisible = true
         let totalRevealTime = DetoxAnimation.interceptionDelay + DetoxAnimation.characterDelay(index: 20) + 0.8

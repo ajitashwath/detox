@@ -2,17 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!-- FamilyControls entitlement: must be provisioned via Apple Developer portal -->
     <key>com.apple.developer.family-controls</key>
     <true/>
 
-    <!-- App Group: shared container for main app + all extensions -->
     <key>com.apple.security.application-groups</key>
     <array>
         <string>group.com.ajitashwath.detox</string>
     </array>
 
-    <!-- Microphone access for AVFoundation voice recording -->
     <key>com.apple.security.device.microphone</key>
     <true/>
 </dict>

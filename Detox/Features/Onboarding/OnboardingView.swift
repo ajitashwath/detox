@@ -1,6 +1,3 @@
-// OnboardingView.swift
-// Detox – Screen 1: App Selection
-
 import SwiftUI
 import FamilyControls
 
@@ -19,7 +16,6 @@ struct OnboardingView: View {
 
                 Spacer()
 
-                // MARK: – Hero Question
                 VStack(alignment: .leading, spacing: Spacing.md) {
                     Text("Which apps")
                         .font(DetoxFont.displayLarge)
@@ -37,7 +33,6 @@ struct OnboardingView: View {
 
                 Spacer().frame(height: Spacing.xxl)
 
-                // MARK: – Selection State Indicator
                 if viewModel.hasSelection {
                     selectionConfirmation
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -48,7 +43,6 @@ struct OnboardingView: View {
 
                 Spacer()
 
-                // MARK: – Permission Error
                 if let error = viewModel.permissionError {
                     Text(error)
                         .font(DetoxFont.caption)
@@ -58,7 +52,6 @@ struct OnboardingView: View {
                         .transition(.opacity)
                 }
 
-                // MARK: – CTA
                 VStack(spacing: Spacing.md) {
                     if !viewModel.hasSelection {
                         Button {
@@ -97,8 +90,6 @@ struct OnboardingView: View {
         .onAppear { animateIn() }
     }
 
-    // MARK: – Sub-Components
-
     private var selectionPrompt: some View {
         VStack(alignment: .leading, spacing: Spacing.xs) {
             Text("No apps selected yet.")
@@ -131,8 +122,6 @@ struct OnboardingView: View {
         }
         .screenPadding()
     }
-
-    // MARK: – Entrance Animation
 
     private func animateIn() {
         withAnimation(DetoxAnimation.slow.delay(0.2)) { titleVisible = true }

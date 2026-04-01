@@ -1,10 +1,5 @@
-// Spacing.swift
-// Detox – 8-Point Grid
-
 import SwiftUI
 
-/// All spacing in Detox is derived from an 8pt base unit.
-/// Using named tokens enforces visual rhythm and makes resizing systematic.
 enum Spacing {
     static let xxs: CGFloat = 2
     static let xs: CGFloat  = 4
@@ -16,20 +11,16 @@ enum Spacing {
     static let huge: CGFloat = 64
     static let massive: CGFloat = 96
 
-    /// Standard screen horizontal padding
     static let screenHorizontal: CGFloat = 28
 
-    /// Standard page top padding (below nav)
     static let pageTop: CGFloat = 40
 }
 
-/// Hairline separator weight
 enum DetoxStroke {
     static let hairline: CGFloat = 0.5
     static let thin: CGFloat     = 1.0
 }
 
-/// Corner radii — kept tight and intentional
 enum DetoxRadius {
     static let button: CGFloat  = 14
     static let card: CGFloat    = 18

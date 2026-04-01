@@ -1,6 +1,3 @@
-// WeeklyReportView.swift
-// Detox – Screen 5: Weekly Report
-
 import SwiftUI
 
 struct WeeklyReportView: View {
@@ -15,13 +12,11 @@ struct WeeklyReportView: View {
 
             VStack(spacing: 0) {
 
-                // MARK: – Header
                 header
 
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 0) {
 
-                        // Hero headline
                         heroSection
                             .opacity(contentVisible ? 1 : 0)
                             .offset(y: contentVisible ? 0 : 20)
@@ -32,7 +27,6 @@ struct WeeklyReportView: View {
                             .padding(.vertical, Spacing.xxl)
                             .padding(.horizontal, Spacing.screenHorizontal)
 
-                        // Bar chart
                         barChartSection
                             .opacity(contentVisible ? 1 : 0)
                             .screenPadding()
@@ -41,7 +35,6 @@ struct WeeklyReportView: View {
                             .padding(.vertical, Spacing.xxl)
                             .padding(.horizontal, Spacing.screenHorizontal)
 
-                        // Insights
                         insightsSection
                             .opacity(contentVisible ? 1 : 0)
                             .screenPadding()
@@ -57,8 +50,6 @@ struct WeeklyReportView: View {
             withAnimation(DetoxAnimation.slow.delay(0.5)) { barsAnimated = true }
         }
     }
-
-    // MARK: – Header
 
     private var header: some View {
         HStack(alignment: .bottom) {
@@ -87,8 +78,6 @@ struct WeeklyReportView: View {
         .padding(.top, Spacing.xl)
     }
 
-    // MARK: – Hero Section
-
     private var heroSection: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("You took back")
@@ -111,8 +100,6 @@ struct WeeklyReportView: View {
         }
     }
 
-    // MARK: – Bar Chart
-
     private var barChartSection: some View {
         VStack(alignment: .leading, spacing: Spacing.lg) {
             Text("Daily pauses")
@@ -129,13 +116,12 @@ struct WeeklyReportView: View {
                     let count = dailyStats.indices.contains(idx) ? dailyStats[idx].pauseCount : 0
 
                     VStack(spacing: Spacing.xs) {
-                        // Pause count label (only if > 0)
+
                         Text(count > 0 ? "\(count)" : "")
                             .font(DetoxFont.micro)
                             .foregroundStyle(Color.black.opacity(DetoxOpacity.tertiary))
                             .frame(height: 14)
 
-                        // Bar
                         RoundedRectangle(cornerRadius: 3, style: .continuous)
                             .fill(Color.black)
                             .frame(
@@ -147,7 +133,6 @@ struct WeeklyReportView: View {
                                 value: barsAnimated
                             )
 
-                        // Day label
                         Text(labels.indices.contains(idx) ? labels[idx] : "")
                             .font(DetoxFont.micro)
                             .foregroundStyle(Color.black.opacity(DetoxOpacity.tertiary))
@@ -158,8 +143,6 @@ struct WeeklyReportView: View {
             .frame(height: 200)
         }
     }
-
-    // MARK: – Insights
 
     private var insightsSection: some View {
         VStack(alignment: .leading, spacing: Spacing.lg) {

@@ -1,9 +1,3 @@
-// VoiceInputManager.swift
-// Detox – AVFoundation Audio Recording
-//
-// MVP: Records voice notes as .m4a files saved to the App Group container.
-// v2 TODO: Plug in SFSpeechRecognizer for on-device transcription.
-
 import Foundation
 import AVFoundation
 import Combine
@@ -27,8 +21,6 @@ final class VoiceInputManager: NSObject {
 
     static let shared = VoiceInputManager()
 
-    // MARK: – State
-
     var isRecording = false
     var lastRecordingURL: URL?
     var recordingDuration: TimeInterval = 0
@@ -37,8 +29,6 @@ final class VoiceInputManager: NSObject {
     private var recorder: AVAudioRecorder?
     private var durationTimer: Timer?
 
-    // MARK: – Permission
-
     func requestPermission() async -> Bool {
         return await withCheckedContinuation { continuation in
             AVAudioApplication.requestRecordPermission { granted in
@@ -46,8 +36,6 @@ final class VoiceInputManager: NSObject {
             }
         }
     }
-
-    // MARK: – Recording Lifecycle
 
     func startRecording() async throws {
         let granted = await requestPermission()
@@ -66,7 +54,6 @@ final class VoiceInputManager: NSObject {
             .appendingPathComponent("VoiceNotes", isDirectory: true)
             .appendingPathComponent(filename)
 
-        // Ensure directory exists
         try? FileManager.default.createDirectory(
             at: fileURL.deletingLastPathComponent(),
             withIntermediateDirectories: true
@@ -116,15 +103,11 @@ final class VoiceInputManager: NSObject {
         recordingDuration = 0
     }
 
-    // MARK: – Duration Timer
-
     private func startDurationTimer() {
         durationTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
             self?.recordingDuration += 0.1
         }
     }
-
-    // MARK: – Duration Display
 
     var durationDisplayString: String {
         let seconds = Int(recordingDuration)
@@ -132,8 +115,6 @@ final class VoiceInputManager: NSObject {
         return String(format: "%02d.%01d", seconds, ms)
     }
 }
-
-// MARK: – AVAudioRecorderDelegate
 
 extension VoiceInputManager: AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {

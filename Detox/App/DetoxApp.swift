@@ -1,6 +1,3 @@
-// DetoxApp.swift
-// Detox – App Entry Point
-
 import SwiftUI
 
 @main
@@ -16,14 +13,11 @@ struct DetoxApp: App {
                 .environment(coordinator)
                 .environment(familyControls)
                 .environment(deviceActivity)
-                .preferredColorScheme(.light)  // Force light mode; we control our own black/white palette
+                .preferredColorScheme(.light)
         }
     }
 }
 
-// MARK: – Root View
-
-/// The single top-level switcher. All navigation lives in AppCoordinator.
 struct RootView: View {
 
     @Environment(AppCoordinator.self) private var coordinator

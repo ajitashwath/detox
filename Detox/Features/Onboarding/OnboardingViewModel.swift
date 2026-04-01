@@ -1,13 +1,8 @@
-// OnboardingViewModel.swift
-// Detox – Onboarding Logic
-
 import SwiftUI
 import FamilyControls
 
 @Observable
 final class OnboardingViewModel {
-
-    // MARK: – State
 
     var isPickerPresented = false
     var isRequestingPermission = false
@@ -18,8 +13,6 @@ final class OnboardingViewModel {
         get { FamilyControlsManager.shared.selection }
         set { FamilyControlsManager.shared.selection = newValue }
     }
-
-    // MARK: – Actions
 
     @MainActor
     func requestPermissionAndShowPicker() async {
@@ -42,10 +35,9 @@ final class OnboardingViewModel {
     }
 
     func completeOnboarding() {
-        // Save the selection (already done via the binding)
-        // Start device activity monitoring
+
         DeviceActivityManager.shared.startDailyMonitoring()
-        // Mark onboarding done & navigate home
+
         AppCoordinator.shared.completeOnboarding()
     }
 }

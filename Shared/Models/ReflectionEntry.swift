@@ -1,10 +1,5 @@
-// ReflectionEntry.swift
-// Detox – Core Data Model
-
 import Foundation
 
-/// A single moment of pause. The atomic unit of the Detox experience.
-/// Created each time a user encounters the interception screen.
 struct ReflectionEntry: Codable, Identifiable, Hashable {
 
     let id: UUID
@@ -14,7 +9,7 @@ struct ReflectionEntry: Codable, Identifiable, Hashable {
     let responseType: ResponseType
     let textContent: String?
     let voiceFileURL: URL?
-    let didContinue: Bool  // true = user continued into the app anyway
+    let didContinue: Bool
 
     init(
         id: UUID = UUID(),
@@ -37,22 +32,17 @@ struct ReflectionEntry: Codable, Identifiable, Hashable {
     }
 }
 
-// MARK: – Response Type
-
 extension ReflectionEntry {
 
     enum ResponseType: String, Codable, CaseIterable {
-        case voice   = "voice"    // User recorded a voice note
-        case typed   = "typed"    // User typed a reason
-        case skipped = "skipped"  // User pressed "Continue anyway"
+        case voice   = "voice"
+        case typed   = "typed"
+        case skipped = "skipped"
     }
 }
 
-// MARK: – Persistence Helpers
-
 extension ReflectionEntry {
 
-    /// Load all entries from the shared App Group container.
     static func loadAll() -> [ReflectionEntry] {
         guard let data = AppGroup.defaults.data(forKey: AppGroup.Keys.reflectionEntries),
               let entries = try? JSONDecoder().decode([ReflectionEntry].self, from: data)
@@ -60,18 +50,16 @@ extension ReflectionEntry {
         return entries.sorted { $0.timestamp > $1.timestamp }
     }
 
-    /// Persist a new entry, appending it to existing entries.
     static func save(_ entry: ReflectionEntry) {
         var existing = loadAll()
         existing.insert(entry, at: 0)
-        // Keep only the last 500 entries to avoid bloat
+
         let trimmed = Array(existing.prefix(500))
         if let data = try? JSONEncoder().encode(trimmed) {
             AppGroup.defaults.set(data, forKey: AppGroup.Keys.reflectionEntries)
         }
     }
 
-    /// Grouped by relative date string (Today, Yesterday, or formatted date).
     static func groupedByDate(_ entries: [ReflectionEntry]) -> [(String, [ReflectionEntry])] {
         let calendar = Calendar.current
         var groups: [(String, [ReflectionEntry])] = []

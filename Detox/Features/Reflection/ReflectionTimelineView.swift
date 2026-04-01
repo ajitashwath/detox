@@ -1,6 +1,3 @@
-// ReflectionTimelineView.swift
-// Detox – Screen 4: Reflection History
-
 import SwiftUI
 
 struct ReflectionTimelineView: View {
@@ -14,7 +11,6 @@ struct ReflectionTimelineView: View {
 
             VStack(spacing: 0) {
 
-                // MARK: – Header
                 header
                     .opacity(headerVisible ? 1 : 0)
                     .offset(y: headerVisible ? 0 : -12)
@@ -22,7 +18,6 @@ struct ReflectionTimelineView: View {
                 DetoxDivider()
                     .padding(.top, Spacing.md)
 
-                // MARK: – Content
                 if viewModel.isEmpty {
                     emptyState
                 } else {
@@ -35,8 +30,6 @@ struct ReflectionTimelineView: View {
             withAnimation(DetoxAnimation.slow.delay(0.1)) { headerVisible = true }
         }
     }
-
-    // MARK: – Header
 
     private var header: some View {
         HStack(alignment: .bottom) {
@@ -64,8 +57,6 @@ struct ReflectionTimelineView: View {
         .screenPadding()
         .padding(.top, Spacing.xl)
     }
-
-    // MARK: – Reflection List
 
     private var reflectionList: some View {
         ScrollView(showsIndicators: false) {
@@ -97,8 +88,6 @@ struct ReflectionTimelineView: View {
             .background(Color.white)
     }
 
-    // MARK: – Empty State
-
     private var emptyState: some View {
         VStack(spacing: Spacing.md) {
             Spacer()
@@ -117,8 +106,6 @@ struct ReflectionTimelineView: View {
     }
 }
 
-// MARK: – Row
-
 private struct ReflectionRowView: View {
 
     let entry: ReflectionEntry
@@ -126,14 +113,12 @@ private struct ReflectionRowView: View {
     var body: some View {
         HStack(alignment: .top, spacing: Spacing.md) {
 
-            // Timestamp
             Text(entry.timestamp.reflectionTimeString)
                 .font(DetoxFont.timestamp)
                 .foregroundStyle(Color.black.opacity(DetoxOpacity.tertiary))
                 .frame(width: 56, alignment: .leading)
                 .padding(.top, 2)
 
-            // Content
             VStack(alignment: .leading, spacing: Spacing.xs) {
                 contentView
 

@@ -1,11 +1,6 @@
-// UserDefaultsManager.swift
-// Detox – Local Storage Layer
-
 import Foundation
 import Combine
 
-/// Centralised access layer for all UserDefaults reads and writes.
-/// Uses the shared App Group suite so extensions can also read/write.
 @Observable
 final class UserDefaultsManager {
 
@@ -13,23 +8,16 @@ final class UserDefaultsManager {
 
     private let defaults = AppGroup.defaults
 
-    // MARK: – Onboarding State
-
     var hasCompletedOnboarding: Bool {
         get { defaults.bool(forKey: AppGroup.Keys.hasCompletedOnboarding) }
         set { defaults.set(newValue, forKey: AppGroup.Keys.hasCompletedOnboarding) }
     }
-
-    // MARK: – Shield State
 
     var isShieldActive: Bool {
         get { defaults.bool(forKey: AppGroup.Keys.isShieldActive) }
         set { defaults.set(newValue, forKey: AppGroup.Keys.isShieldActive) }
     }
 
-    // MARK: – Pause Counting
-
-    /// Returns today's pause count, resetting to 0 if the stored date is not today.
     var pauseCountToday: Int {
         get {
             resetPauseCountIfNeeded()
@@ -52,9 +40,6 @@ final class UserDefaultsManager {
         }
     }
 
-    // MARK: – Weekly Pause Counts
-
-    /// `[bundleID: pauseCount]` for the current week.
     var weeklyPauseCounts: [String: Int] {
         get {
             guard let data = defaults.data(forKey: AppGroup.Keys.weeklyPauseCounts),
@@ -74,8 +59,6 @@ final class UserDefaultsManager {
         counts[bundleID, default: 0] += 1
         weeklyPauseCounts = counts
     }
-
-    // MARK: – Insight Text (cycling)
 
     private let insightTexts = [
         "You're building awareness.",

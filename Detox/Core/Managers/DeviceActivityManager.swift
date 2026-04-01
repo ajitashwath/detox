@@ -1,16 +1,7 @@
-// DeviceActivityManager.swift
-// Detox – Usage Tracking via DeviceActivity framework
-
 import Foundation
 import DeviceActivity
 import Combine
 
-/// Manages DeviceActivity schedules and aggregates usage data
-/// for the Home screen stat and Weekly Report.
-///
-/// - The main schedule runs midnight → midnight daily.
-/// - The extension `DetoxDeviceActivity` receives callbacks and
-///   writes aggregated data into the shared App Group container.
 @Observable
 final class DeviceActivityManager {
 
@@ -18,16 +9,11 @@ final class DeviceActivityManager {
 
     private let center = DeviceActivityCenter()
 
-    // MARK: – Schedule Names
-
     enum ScheduleName {
         static let daily  = DeviceActivityName("detox.daily")
         static let weekly = DeviceActivityName("detox.weekly")
     }
 
-    // MARK: – Start Monitoring
-
-    /// Begin monitoring. Call after FamilyControls is authorized.
     func startDailyMonitoring() {
         let schedule = DeviceActivitySchedule(
             intervalStart: DateComponents(hour: 0, minute: 0),
@@ -46,14 +32,10 @@ final class DeviceActivityManager {
         center.stopMonitoring([ScheduleName.daily, ScheduleName.weekly])
     }
 
-    // MARK: – Derived Stats (read from App Group)
-
-    /// Today's pause count — incremented by the ShieldAction extension on each interception.
     var pauseCountToday: Int {
         UserDefaultsManager.shared.pauseCountToday
     }
 
-    /// Build `WeeklyStats` from stored `ReflectionEntry` records.
     func buildWeeklyStats() -> WeeklyStats {
         let allEntries = ReflectionEntry.loadAll()
         let calendar = Calendar.current
@@ -74,7 +56,6 @@ final class DeviceActivityManager {
         return WeeklyStats(weekStartDate: weekDays.first ?? today, dailyStats: dailyStats)
     }
 
-    /// Most paused app this week (by bundle ID).
     func topBlockedApp() -> String? {
         let counts = UserDefaultsManager.shared.weeklyPauseCounts
         return counts.max(by: { $0.value < $1.value })?.key

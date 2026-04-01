@@ -1,10 +1,5 @@
-// AppCoordinator.swift
-// Detox – Navigation State Machine
-
 import SwiftUI
 
-/// Single source of truth for which screen is shown.
-/// Drives the root navigator via a simple enum — no NavigationStack stack needed.
 @Observable
 final class AppCoordinator {
 
