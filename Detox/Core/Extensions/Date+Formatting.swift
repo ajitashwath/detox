@@ -1,7 +1,6 @@
 import Foundation
 
 extension Date {
-
     var reflectionTimeString: String {
         formatted(.dateTime.hour().minute())
     }
