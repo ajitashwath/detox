@@ -1,9 +1,5 @@
 # Detox – Digital Wellbeing iOS App
-
-> A hyper-minimalist iOS app that introduces a moment of pause before opening distracting apps.
-> 
-> *"The app should feel like a mirror, not a wall."*
-
+A hyper-minimalist iOS app that introduces a moment of pause before opening distracting apps.
 ---
 
 ## Overview
@@ -13,8 +9,6 @@ Detox gently intercepts impulsive app-opening behaviour by surfacing a single re
 > **Why are you opening this?**
 
 Users can record a voice note, type a reason, or hold to continue. Over time, the act of pausing builds awareness — without ever blocking.
-
----
 
 ## Tech Stack
 
@@ -27,8 +21,6 @@ Users can record a voice note, type a reason, or hold to continue. Over time, th
 | Storage | UserDefaults via App Group |
 | Architecture | MVVM + Features-based modular structure |
 
----
-
 ## Project Structure
 
 ```
@@ -39,28 +31,21 @@ DetoxDeviceActivity/ → Background usage aggregation
 Shared/         → Models shared across all targets
 ```
 
----
-
 ## Screens
-
 1. **Onboarding** — App selection via native FamilyActivityPicker
 2. **Home** — Animated pause count, monochrome toggle
 3. **Interception Shield** — Full black screen, character-reveal headline, voice/type/skip
 4. **Reflection Timeline** — Chronological log of all pauses
 5. **Weekly Report** — Pure SwiftUI bar chart, time-reclaimed headline
 
----
 
 ## Setup
-
 See **[SETUP.md](./SETUP.md)** for complete Xcode project configuration instructions.
 
 **Requirements:**
 - Xcode 15+
 - iOS 17+ physical device
 - Paid Apple Developer account (FamilyControls entitlement)
-
----
 
 ## Design Principles
 
@@ -70,6 +55,3 @@ See **[SETUP.md](./SETUP.md)** for complete Xcode project configuration instruct
 - **Typography as hierarchy** — weight and opacity, never color
 - **Offline-first** — zero backend required for MVP
 
----
-
-*Calm. Controlled. Reflective. Premium.*

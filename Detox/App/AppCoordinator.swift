@@ -2,7 +2,6 @@ import SwiftUI
 
 @Observable
 final class AppCoordinator {
-
     static let shared = AppCoordinator()
 
     enum Route: Equatable {

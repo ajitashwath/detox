@@ -5,19 +5,13 @@
 > **Bundle ID**: `com.ajitashwath.detox`  
 > **App Group**: `group.com.ajitashwath.detox`
 
----
-
 ## Prerequisites
-
 - Xcode 15+
 - A **paid Apple Developer account** (FamilyControls requires it)
 - A **physical iPhone** (FamilyControls cannot be tested in Simulator)
 - FamilyControls entitlement activated in your developer portal
 
----
-
 ## Step 1 – Create the Xcode Project
-
 1. Open Xcode → **File → New → Project**
 2. Choose **iOS → App**
 3. Fill in:
@@ -30,10 +24,7 @@
 4. Set the project location to this repository root (`e:/detox/`)
 5. **Uncheck** "Create Git repository" (we already have one)
 
----
-
 ## Step 2 – Add All Source Files
-
 After creating the project, add the existing source files by **dragging into the Xcode navigator**:
 
 ### Main Target (`Detox`)
@@ -89,10 +80,7 @@ After creation:
 - Delete auto-generated stubs
 - Add `DetoxDeviceActivity/DeviceActivityReportExtension.swift`
 
----
-
 ## Step 4 – Configure Target Memberships for Shared Files
-
 Select each file in `Shared/` and in the **File Inspector (right panel)** check the box for every target that needs it:
 
 | File | Detox | DetoxShieldUI | DetoxShieldAction | DetoxDeviceActivity |
@@ -112,12 +100,10 @@ Also share these Core files with the Shield extension:
 | `Core/Storage/UserDefaultsManager.swift` | ✓ | ✓ |
 | `Core/Managers/VoiceInputManager.swift` | ✓ | — |
 
----
 
 ## Step 5 – Configure Signing & Capabilities
 
 For **each target** (Detox, DetoxShieldUI, DetoxShieldAction, DetoxDeviceActivity):
-
 1. Select the target → **Signing & Capabilities** tab
 2. Set **Team** to your Apple Developer team
 3. Click **+ Capability** and add:
@@ -126,7 +112,6 @@ For **each target** (Detox, DetoxShieldUI, DetoxShieldAction, DetoxDeviceActivit
    - **Family Controls**
    - **Microphone** (via Privacy – Microphone Usage Description in Info.plist)
 
----
 
 ## Step 6 – Info.plist Entries
 
@@ -152,8 +137,6 @@ Ensure `NSExtensionPrincipalClass` is set to:
 $(PRODUCT_MODULE_NAME).ShieldActionProvider
 ```
 
----
-
 ## Step 7 – Assign Entitlements Files
 
 For each target, go to **Build Settings** → search **Code Signing Entitlements** → set the path:
@@ -165,7 +148,6 @@ For each target, go to **Build Settings** → search **Code Signing Entitlements
 | DetoxShieldAction | `DetoxShieldAction/DetoxShieldAction.entitlements` |
 | DetoxDeviceActivity | `DetoxDeviceActivity/DetoxDeviceActivity.entitlements` |
 
----
 
 ## Step 8 – Build & Run
 
@@ -178,7 +160,6 @@ For each target, go to **Build Settings** → search **Code Signing Entitlements
    - Toggle the shield ON
 5. Open a blocked app — the interception screen should appear
 
----
 
 ## Project Structure Reference
 
@@ -230,8 +211,6 @@ e:/detox/
         └── DetoxSession.swift
 ```
 
----
-
 ## Common Issues
 
 | Issue | Fix |
@@ -242,7 +221,6 @@ e:/detox/
 | Voice recording permission crash | Add `NSMicrophoneUsageDescription` to main app's Info.plist |
 | Shield extension not loading | Verify `NSExtensionPrincipalClass` matches the exact class name |
 
----
 
 ## Architecture Notes
 

@@ -2,7 +2,6 @@ import SwiftUI
 import ManagedSettings
 
 struct ShieldInterceptionView: View {
-
     @State private var headlineVisible = false
     @State private var actionsVisible = false
     @State private var isTyping = false

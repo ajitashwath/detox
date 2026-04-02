@@ -2,7 +2,6 @@ import Foundation
 import FamilyControls
 
 struct AppSelectionStore {
-
     static func save(_ selection: FamilyActivitySelection) {
         if let data = try? JSONEncoder().encode(selection) {
             AppGroup.defaults.set(data, forKey: AppGroup.Keys.selectedAppsData)

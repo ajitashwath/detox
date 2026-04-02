@@ -1,7 +1,6 @@
 import Foundation
 
 struct ReflectionEntry: Codable, Identifiable, Hashable {
-
     let id: UUID
     let timestamp: Date
     let appBundleID: String
@@ -33,7 +32,6 @@ struct ReflectionEntry: Codable, Identifiable, Hashable {
 }
 
 extension ReflectionEntry {
-
     enum ResponseType: String, Codable, CaseIterable {
         case voice   = "voice"
         case typed   = "typed"
@@ -42,7 +40,6 @@ extension ReflectionEntry {
 }
 
 extension ReflectionEntry {
-
     static func loadAll() -> [ReflectionEntry] {
         guard let data = AppGroup.defaults.data(forKey: AppGroup.Keys.reflectionEntries),
               let entries = try? JSONDecoder().decode([ReflectionEntry].self, from: data)
@@ -53,7 +50,6 @@ extension ReflectionEntry {
     static func save(_ entry: ReflectionEntry) {
         var existing = loadAll()
         existing.insert(entry, at: 0)
-
         let trimmed = Array(existing.prefix(500))
         if let data = try? JSONEncoder().encode(trimmed) {
             AppGroup.defaults.set(data, forKey: AppGroup.Keys.reflectionEntries)
@@ -74,7 +70,6 @@ extension ReflectionEntry {
             } else {
                 label = entry.timestamp.formatted(.dateTime.weekday(.wide).month().day())
             }
-
             if let idx = seen[label] {
                 groups[idx].1.append(entry)
             } else {

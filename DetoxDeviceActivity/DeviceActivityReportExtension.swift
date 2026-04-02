@@ -10,9 +10,7 @@ struct DetoxDeviceActivityReport: DeviceActivityReportExtension {
 }
 
 struct DetoxActivityReport: DeviceActivityReportScene {
-
     let context: DeviceActivityReport.Context = .init(rawValue: "detox.daily.report")
-
     func makeConfiguration(representing data: DeviceActivityResults<DeviceActivityData>) -> some DeviceActivityReportConfiguration {
         DetoxReportConfiguration(data: data)
     }
@@ -20,15 +18,12 @@ struct DetoxActivityReport: DeviceActivityReportScene {
 
 struct DetoxReportConfiguration: DeviceActivityReportConfiguration {
     let data: DeviceActivityResults<DeviceActivityData>
-
     func body(context: DeviceActivityReport.Context) -> some View {
-
         Color.clear
             .onAppear { aggregate() }
     }
 
     private func aggregate() {
-
         print("[DetoxDeviceActivity] Aggregation callback fired.")
     }
 }

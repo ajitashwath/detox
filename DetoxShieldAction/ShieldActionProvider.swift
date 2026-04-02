@@ -2,18 +2,14 @@ import ManagedSettings
 import DeviceActivity
 
 final class ShieldActionProvider: ShieldActionDataSource {
-
     private let store = ManagedSettingsStore()
-
     override func handle(action: ShieldAction, for application: Application, completionHandler: @escaping (ShieldActionResponse) -> Void) {
         switch action {
         case .primaryButtonPressed:
-
             unlockTemporarily(application: application)
             completionHandler(.close)
 
         case .secondaryButtonPressed:
-
             completionHandler(.defer)
 
         @unknown default:

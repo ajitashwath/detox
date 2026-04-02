@@ -3,9 +3,7 @@ import ManagedSettingsUI
 import SwiftUI
 
 final class ShieldConfigurationProvider: ShieldConfigurationDataSource {
-
     override func configuration(shielding application: Application) -> ShieldConfiguration {
-
         ShieldConfiguration(
             backgroundBlurStyle: .none,
             backgroundColor: .black,
